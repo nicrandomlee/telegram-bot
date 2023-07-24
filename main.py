@@ -12,6 +12,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def add_modules_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['add_module_mode'] = True
+    context.user_data['delete_module_mode'] = False
     await update.message.reply_text("Please enter a module code. Eg: CS1101S. If you do not wish to add a module, please enter 'done'")
 
 async def find_module_friends_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -31,7 +32,7 @@ async def find_module_friends_command(update: Update, context: ContextTypes.DEFA
     await update.message.reply_text(message)
 
 async def delete_module_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-
+    context.user_data['add_module_mode'] = False
     telehandle: str = update.message.from_user.username #tele handle
 
     all_modules_list = get_modules(telehandle)
