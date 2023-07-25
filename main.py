@@ -18,6 +18,7 @@ async def add_modules_command(update: Update, context: ContextTypes.DEFAULT_TYPE
 async def find_module_friends_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     '''
     Calls find_friends from firebase_connection to return a list, with each element consisting of a 2-element tuple, with index 0 being module code and index 1 being the list of people taking the module. 
+    Eg: [('CS1234', ['nicrandomlee', 'charltonteo']), ('CS1235', ['nicrandomlee'])]
     '''
 
     telehandle: str = update.message.from_user.username #tele handle
@@ -60,12 +61,11 @@ def delete_module_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Message Handling  #
 #####################
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    print("handle_message")
     # Inform if it is group or private chat
     message_type: str = update.message.chat.type #message type
     text: str = update.message.text  # Incoming message
     telehandle: str = update.message.from_user.username #tele handle
-    
+
     # UserID, group/private chat/ incoming message
     print(f'User {telehandle} ({update.message.chat.id}) in {message_type}: {text}')
     

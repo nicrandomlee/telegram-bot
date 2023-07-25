@@ -64,7 +64,7 @@ def get_modules(telehandle: str):
     Returns a list of all modules currently registered by user in database.
     '''
     user_modules_list = database.child('users').child(telehandle).get().val()
-    return user_modules_list
+    return list(set(user_modules_list))
 
 def delete_module(telehandle: str, module_code: str):
     module_code = module_code.upper()
@@ -81,10 +81,11 @@ def delete_module(telehandle: str, module_code: str):
 
     # Making changes to modules containing users
     modules_tab_list = database.child('modules').child(module_code).get().val()
+    print(modules_tab_list)
 
     if modules_tab_list == None:
         return
 
-    if telehandle not in modules_tab_list:
+    if telehandle in modules_tab_list:
       modules_tab_list.remove(telehandle)
       database.child('modules').child(module_code).set(modules_tab_list)
